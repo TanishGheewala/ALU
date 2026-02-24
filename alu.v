@@ -1,8 +1,6 @@
 `timescale 1ns/1ps
-module alu #(parameter WIDTH = 8)(
 
-);
-
-end
-
+module alu;
+    initial
+    $display ("Hello World!");
 endmodule
