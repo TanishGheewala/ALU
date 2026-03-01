@@ -1,18 +1,23 @@
 
 # ALU
 ## Overview 
-A Parametric Arithmetic Logic Unit (ALU) suitable for integration into a simple CPU datapath.
-Written in System Verilog (clean up)
+A Parametric Arithmetic Logic Unit (ALU) written in SystemVerilog suitable for integration into a simple CPU datapath.
 
-### title
--
--
+An Arithmetic-Logic Unit (ALU) within a CPU takes input, performs operations (arithmetic, logic, shifts, comparisons), and produces an output. A parametric ALU isn't hard-coded and can scale.
+
+### Features
+- Takes two operands (A, B), an operation select (op), and produces a result (Y), and optional flags (e.g. overflow).
+- Parametric
 -
 
-### title 2
+### Title
 - 
 - 
 - 
+
+OP ENCODING TABLE
+
+REPO CONTENTS 
 
 ## Setup Development Environment
 
