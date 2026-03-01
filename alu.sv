@@ -56,10 +56,12 @@ assign shamt = B[SHAMT_W-1:0];
 
 // Combinational ALU Logic
 always_comb begin
+
     // Default Outputs
     Y   = '0;
     OVF = 1'b0;
 
+    // Opcode Case
     unique case (op)
 
         // Logic Operations
