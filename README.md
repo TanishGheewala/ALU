@@ -3,16 +3,22 @@
 ## Overview 
 A Parametric Arithmetic Logic Unit (ALU) written in SystemVerilog at the RTL level suitable for integration into a simple CPU datapath.
 
-### Features
-- Takes two operands (A, B), an operation select (op), and produces a result (Y), and optional flags (e.g. overflow).
-- Parametric (Not hard-coded, scalable)
-- Logic, Arithmetic, Shift, and Comparison operations.
-- 
+### Repository Structure
+```text
+ALU/
+├── README.md
+├── alu.sv
+├── tb_alu.sv
+```
 
-### Title
-- 
-- 
-- 
+### Features
+- Synthesizable RTL structure with testbench, waveform, and schematic.
+- Takes two operands (A, B), an operation select (op), and produces a result (Y), and optional flags (e.g. overflow).
+- Parametric (Not hard-coded, scalable).
+- Logic, arithmetic, shift, and comparison operations.
+- 4-bit opcode interface.
+- Signed/unsigned mode control.
+- More
 
 ### 4-bit Opcode Table
 | Opcode | Operation | Definition | Type |
@@ -34,13 +40,6 @@ A Parametric Arithmetic Logic Unit (ALU) written in SystemVerilog at the RTL lev
 | 1110 | GE  | Y = (A >= B) ? 1 : 0 | COMPARISON |
 | 1111 | SLT | Y = (A <  B) ? 1 : 0 | COMPARISON |
 
-### Repository Structure
-```text
-ALU/
-├── README.md  #
-├── alu.sv     #
-├── tb_alu.sv  #
-```
 
 ## Setup Development Environment
 
