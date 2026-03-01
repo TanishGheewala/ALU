@@ -1,7 +1,7 @@
 
 # ALU
 ## Overview 
-A Parametric Arithmetic Logic Unit (ALU) written in SystemVerilog suitable for integration into a simple CPU datapath.
+A Parametric Arithmetic Logic Unit (ALU) written in SystemVerilog at the RTL level suitable for integration into a simple CPU datapath.
 
 ### Features
 - Takes two operands (A, B), an operation select (op), and produces a result (Y), and optional flags (e.g. overflow).
@@ -37,7 +37,6 @@ A Parametric Arithmetic Logic Unit (ALU) written in SystemVerilog suitable for i
 ### Repository Structure
 ```text
 ALU/
-├── archive/   #
 ├── README.md  #
 ├── alu.sv     #
 ├── tb_alu.sv  #

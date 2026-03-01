@@ -1,6 +1,8 @@
 // alu.sv
 // Tanish Gheewala - March 2026
+// Parametric Arithmetic Logic Unit (ALU) at the RTL Level
 
+'timescale 1ns/1ps
 // Module Header
 module alu #(
     parameter int WIDTH = 8,         // Operand Width (Default: 8)
@@ -103,6 +105,8 @@ always_comb begin
         end
         OP_SLT: begin
         end
+    
+         default: begin end
 
     endcase
 end
