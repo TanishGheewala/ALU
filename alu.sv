@@ -2,7 +2,7 @@
 // Tanish Gheewala - March 2026
 // Parametric Arithmetic Logic Unit (ALU) at the RTL Level
 
-'timescale 1ns/1ps
+`timescale 1ns/1ps
 // Module Header
 module alu #(
     parameter int WIDTH = 8,         // Operand Width (Default: 8)
@@ -62,53 +62,119 @@ always_comb begin
     // Default Outputs
     Y   = '0;
     OVF = 1'b0;
+    // Note: Upgrade to Case Statement instead of If
+    // Logic Operations
+    if (op == OP_AND) begin // AND: A & B
+        Y = { {WIDTH{1'b0}}, (A & B) };
 
-    // Opcode Case
-    unique case (op)
+    end else if (op == OP_OR) begin // OR: A | B
+        Y = { {WIDTH{1'b0}}, (A | B) };
 
-        // Logic Operations
-        OP_AND: begin
-        end
-        OP_OR: begin
-        end
-        OP_XOR: begin
-        end
-        OP_NOT: begin
+    end else if (op == OP_XOR) begin // XOR: A ^ B
+        Y = { {WIDTH{1'b0}}, (A ^ B) };
+
+    end else if (op == OP_NOT) begin // NOT: ~A (B ignored)
+        Y = { {WIDTH{1'b0}}, (~A) };
+
+    // Arithmetic Operations
+    end else if (op == OP_ADD) begin // ADD: A + B
+    logic [WIDTH-1:0] r;
+    logic [WIDTH:0]   ext;
+
+    r   = A + B;
+    ext = {1'b0, A} + {1'b0, B};
+
+    if (signed_mode) begin
+        Y   = { {WIDTH{r[WIDTH-1]}}, r };
+        OVF = (A_s[WIDTH-1] == B_s[WIDTH-1]) && (r[WIDTH-1] != A_s[WIDTH-1]);
+    end else begin
+        Y   = { {WIDTH{1'b0}}, r };
+        OVF = ext[WIDTH];
+    end
+
+    end else if (op == OP_SUB) begin // SUB: A - B
+        logic [WIDTH-1:0] r;
+        logic             borrow;
+
+        r      = A - B;
+        borrow = (A_u < B_u);
+
+        if (signed_mode) begin
+            Y   = { {WIDTH{r[WIDTH-1]}}, r };
+            OVF = (A_s[WIDTH-1] != B_s[WIDTH-1]) && (r[WIDTH-1] != A_s[WIDTH-1]);
+        end else begin
+            Y   = { {WIDTH{1'b0}}, r };
+            OVF = borrow;
         end
 
-        // Arithmetic Operations
-        OP_ADD: begin
-        end
-        OP_SUB: begin
-        end
-        OP_INC: begin
-        end
-        OP_DEC: begin
-        end
-        OP_MUL: begin
+    end else if (op == OP_INC) begin // INC: A + 1
+        logic [WIDTH-1:0] r;
+        logic [WIDTH:0]   ext;
+
+        r   = A + 1'b1;
+        ext = {1'b0, A} + {{WIDTH{1'b0}}, 1'b1};
+
+        if (signed_mode) begin
+            Y   = { {WIDTH{r[WIDTH-1]}}, r };
+            OVF = (A_s[WIDTH-1] == 1'b0) && (r[WIDTH-1] == 1'b1);
+        end else begin
+            Y   = { {WIDTH{1'b0}}, r };
+            OVF = ext[WIDTH];
         end
 
-        // Shift Operations
-        OP_SLL: begin
-        end
-        OP_SRL: begin
-        end
-        OP_SRA: begin
+    end else if (op == OP_DEC) begin // DEC: A - 1
+        logic [WIDTH-1:0] r;
+        logic             borrow;
+
+        r      = A - 1'b1;
+        borrow = (A_u < 1);
+
+        if (signed_mode) begin
+            Y   = { {WIDTH{r[WIDTH-1]}}, r };
+            OVF = (A_s[WIDTH-1] == 1'b1) && (r[WIDTH-1] == 1'b0);
+        end else begin
+            Y   = { {WIDTH{1'b0}}, r };
+            OVF = borrow;
         end
 
-        // Comparison Operations
-        OP_EQ: begin
+    end else if (op == OP_MUL) begin // MUL: A * B
+        if (signed_mode) begin
+            Y = $signed(A_s) * $signed(B_s);
+        end else begin
+            Y = A_u * B_u;
         end
-        OP_GT: begin
-        end
-        OP_GE: begin
-        end
-        OP_SLT: begin
-        end
-    
-         default: begin end
 
-    endcase
+    // Shift Operations
+    // Shamt = Lower Bits of B
+    end else if (op == OP_SLL) begin // SLL: A << shamt
+        Y = { {WIDTH{1'b0}}, (A << shamt) };
+
+    end else if (op == OP_SRL) begin // SRL: A >> shamt
+        Y = { {WIDTH{1'b0}}, (A >> shamt) };
+
+    end else if (op == OP_SRA) begin // SRA: A >>> shamt
+        Y = { {WIDTH{1'b0}}, logic'(A_s >>> shamt) };
+
+    // Comparison Operations
+    // EQ = Equal, GT = Greater Than, GE = Greater or Equal, SLT = Set on Less Than
+    end else if (op == OP_EQ) begin // EQ: A == B
+        Y = (A == B) ? {{(2*WIDTH-1){1'b0}}, 1'b1} : '0;
+
+    end else if (op == OP_GT) begin // GT: A > B
+        Y = (A_u > B_u) ? {{(2*WIDTH-1){1'b0}}, 1'b1} : '0;
+
+    end else if (op == OP_GE) begin // GE: A >= B
+        Y = (A_u >= B_u) ? {{(2*WIDTH-1){1'b0}}, 1'b1} : '0;
+
+    end else if (op == OP_SLT) begin // SLT: A < B
+        if (signed_mode) begin
+            Y = (A_s < B_s) ? {{(2*WIDTH-1){1'b0}}, 1'b1} : '0;
+        end else begin
+            Y = (A_u < B_u) ? {{(2*WIDTH-1){1'b0}}, 1'b1} : '0;
+        end
+
+    end else begin
+    end
+
 end
-
 endmodule
