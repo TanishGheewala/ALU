@@ -148,7 +148,7 @@ always_comb begin
         Y = { {WIDTH{1'b0}}, (A >> shamt) };
 
     end else if (op == OP_SRA) begin // SRA: A >>> shamt
-        Y = { {WIDTH{1'b0}}, logic'(A_s >>> shamt) };
+        Y = { {WIDTH{1'b0}}, (A_s >>> shamt) [WIDTH-1:0] };
 
     // Comparison Operations
     // EQ = Equal, GT = Greater Than, GE = Greater or Equal, SLT = Set on Less Than
@@ -170,9 +170,7 @@ always_comb begin
             Y = (A_u < B_u) ? {{(2*WIDTH-1){1'b0}}, 1'b1} : '0;
         end
 
-    end else begin // Default for Invalid Opcode
-        Y   = '0;
-        OVF = 1'b0;
+    end else begin
     end
 
 end
