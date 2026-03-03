@@ -57,4 +57,4 @@ ALU/
 ## Usage
 0. Delete wave.vcd if modifying FILENAME.
 1. Run FILENAME.sv using the VS Code extension.
-2. Run `gtkwave FILENAME.vcd`
+2. Run `gtkwave FILENAME.vcd`.
