@@ -1,20 +1,38 @@
- // tb_alu.sv
- // Tanish Gheewala - March 2026
- // Testbench for the Parametric Arithmetic Logic Unit (ALU) at the RTL Level
+// tb_alu.sv
+// Tanish Gheewala - March 2026
+// Testbench for the Parametric Arithmetic Logic Unit (ALU) at the RTL Level
 
 `timescale 1ns/1ps
 
+// Module Header
 module tb_alu;
+    // Must Match alu.sv Parameters
+    localparam int WIDTH = 8;
+    localparam int OPW   = 4;
 
-// Parameters
+    // DUT inputs
+    logic [WIDTH-1:0] A;
+    logic [WIDTH-1:0] B;
+    logic [OPW-1:0]   op;
+    logic             signed_mode;
 
-// DUT inputs
+    // DUT outputs
+    logic [(2*WIDTH)-1:0] Y;
+    logic                 OVF;
 
-// DUT outputs
+    // DUT Instantiation
+    alu #(
+        .WIDTH(WIDTH),
+        .OPW(OPW)
+    ) dut (
+        .A(A),
+        .B(B),
+        .op(op),
+        .signed_mode(signed_mode),
+        .Y(Y),
+        .OVF(OVF)
+    );
 
-// Checks
-
-    end
-
+    
 
 endmodule
