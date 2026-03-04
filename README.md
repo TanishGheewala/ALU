@@ -1,4 +1,3 @@
-
 # ALU
 ## Overview 
 A Parametric Arithmetic Logic Unit (ALU) written in SystemVerilog at the RTL level suitable for integration into a CPU datapath.
@@ -45,7 +44,6 @@ ALU/
 | 1101 | GT  | Y = (A >  B) ? 1 : 0 | COMPARISON |
 | 1110 | GE  | Y = (A >= B) ? 1 : 0 | COMPARISON |
 | 1111 | SLT | Y = (A <  B) ? 1 : 0 | COMPARISON |
-
 
 ## Setup Development Environment
 
