@@ -148,8 +148,8 @@ always_comb begin
         Y = { {WIDTH{1'b0}}, (A >> shamt) };
 
     end else if (op == OP_SRA) begin // SRA: A >>> shamt
-        Y = { {WIDTH{1'b0}}, (A_s >>> shamt) [WIDTH-1:0] };
-
+        Y = { {WIDTH{1'b0}}, (A_s >>> shamt) };
+        
     // Comparison Operations
     // EQ = Equal, GT = Greater Than, GE = Greater or Equal, SLT = Set on Less Than
     end else if (op == OP_EQ) begin // EQ: A == B

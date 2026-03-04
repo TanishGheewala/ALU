@@ -46,15 +46,18 @@ ALU/
 ### Prerequisites
 - VS Code with an integrated PowerShell terminal.
 - This repository cloned locally.
-- [Suitable Verilog Code Runner extension for VS Code.](https://marketplace.visualstudio.com/items?itemName=leafvmaple.verilog)
-- [Suitable HDL extension for VS Code.](https://marketplace.visualstudio.com/items?itemName=mshr-h.VerilogHDL)
+- [Optional HDL extension for VS Code.](https://marketplace.visualstudio.com/items?itemName=mshr-h.VerilogHDL)
 
 ### Installation
 - [Download Icarus Verilog & GTKWave.](https://bleyer.org/icarus/)
 - Make sure to select Full Installation when running the .exe.
 
-
 ## Usage
-0. Delete wave.vcd if modifying FILENAME.
-1. Run FILENAME.sv using the VS Code extension.
-2. Run `gtkwave FILENAME.vcd`.
+0. Delete files '`sim`' and '`tb_alu.vcd`'.
+1. In the VS Code terminal, run: 
+    - `iverilog -g2012 -o sim tb_alu.sv alu.sv`
+    - `vvp sim`
+    - `gtkwave tb_alu.vcd`
+2. Click tb_alu in GTKWave and view signals as needed.
+
+Note: You can also generate a schematic in AMD Vivado software.
