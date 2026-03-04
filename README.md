@@ -6,9 +6,14 @@ A Parametric Arithmetic Logic Unit (ALU) written in SystemVerilog at the RTL lev
 ### Repository Structure
 ```text
 ALU/
-├── README.md
-├── alu.sv
-├── tb_alu.sv
+├── README.md           - Readme File
+├── alu.sv              - Arithmetic-Logic Unit
+├── tb_alu.sv           - Testbench
+├── sim                 - Simulation File
+├── tb_alu.vcd          - Waveform File
+├── waveform.png        - Waveform Diagram
+├── schematic.sch       - Schematic File
+├── schematic.png       - Schematic Diagram
 ```
 
 ### Features
@@ -18,7 +23,8 @@ ALU/
 - Logic, arithmetic, shift, and comparison operations.
 - 4-bit opcode interface.
 - Signed/unsigned mode control.
-- More
+- Overflow flag generation.
+- Testbench verification.
 
 ### 4-bit Opcode Table
 | Opcode | Operation | Definition | Type |
@@ -60,4 +66,11 @@ ALU/
     - `gtkwave tb_alu.vcd`
 2. Click tb_alu in GTKWave and view signals as needed.
 
-Note: You can also generate a schematic in AMD Vivado software.
+Note: You can also generate the schematic in AMD Vivado software.
+
+## Expected Results
+
+### Schematic
+![schematic.png](schematic.png)
+### Waveform
+![waveform.png](waveform.png)
