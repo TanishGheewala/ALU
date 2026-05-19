@@ -1,0 +1,59 @@
+
+# Entity: alu 
+- **File**: alu.sv
+
+## Diagram
+![Diagram](alu.svg "Diagram")
+## Generics
+
+| Generic name | Type | Value | Description |
+| ------------ | ---- | ----- | ----------- |
+| WIDTH        | int  | 8     |             |
+| OPW          | int  | 4     |             |
+
+## Ports
+
+| Port name   | Direction | Type            | Description |
+| ----------- | --------- | --------------- | ----------- |
+| A           | input     | [WIDTH-1:0]     |             |
+| B           | input     | [WIDTH-1:0]     |             |
+| op          | input     | [OPW-1:0]       |             |
+| signed_mode | input     |                 |             |
+| Y           | output    | [(2*WIDTH)-1:0] |             |
+| OVF         | output    |                 |             |
+
+## Signals
+
+| Name  | Type                     | Description |
+| ----- | ------------------------ | ----------- |
+| A_s   | logic signed [WIDTH-1:0] |             |
+| B_s   | logic signed [WIDTH-1:0] |             |
+| A_u   | logic [WIDTH-1:0]        |             |
+| B_u   | logic [WIDTH-1:0]        |             |
+| shamt | logic [SHAMT_W-1:0]      |             |
+
+## Constants
+
+| Name    | Type | Value                           | Description |
+| ------- | ---- | ------------------------------- | ----------- |
+| OP_AND  |      | 4'b0000                         |             |
+| OP_OR   |      | 4'b0001                         |             |
+| OP_XOR  |      | 4'b0010                         |             |
+| OP_NOT  |      | 4'b0011                         |             |
+| OP_ADD  |      | 4'b0100                         |             |
+| OP_SUB  |      | 4'b0101                         |             |
+| OP_INC  |      | 4'b0110                         |             |
+| OP_DEC  |      | 4'b0111                         |             |
+| OP_MUL  |      | 4'b1000                         |             |
+| OP_SLL  |      | 4'b1001                         |             |
+| OP_SRL  |      | 4'b1010                         |             |
+| OP_SRA  |      | 4'b1011                         |             |
+| OP_EQ   |      | 4'b1100                         |             |
+| OP_GT   |      | 4'b1101                         |             |
+| OP_GE   |      | 4'b1110                         |             |
+| OP_SLT  |      | 4'b1111                         |             |
+| SHAMT_W |      | (WIDTH <= 1) ? 1 : clog2(WIDTH) |             |
+
+## Processes
+- unnamed: (  )
+  - **Type:** always_comb
