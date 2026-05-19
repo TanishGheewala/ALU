@@ -5,14 +5,16 @@ A Parametric Arithmetic Logic Unit (ALU) written in SystemVerilog at the RTL lev
 ### Repository Structure
 ```text
 ALU/
-├── README.md           - Readme File
-├── alu.sv              - Arithmetic-Logic Unit
-├── tb_alu.sv           - Testbench
-├── sim                 - Simulation File
-├── tb_alu.vcd          - Waveform File
-├── waveform.png        - Waveform Diagram
-├── schematic.sch       - Schematic File
-├── schematic.png       - Schematic Diagram
+├── README.md                   - Readme File
+├── alu.sv                      - Arithmetic-Logic Unit
+├── tb_alu.sv                   - Testbench
+├── sim                         - Simulation File
+├── tb_alu.vcd                  - Waveform File
+├── waveform.png                - Waveform Diagram
+├── schematic.sch               - Schematic File
+├── schematic.png               - Schematic Diagram
+├── alu.svg                     - TerosHDL SVG
+├── TerosHDL Documentation.md   - TerosHDL Documentation
 ```
 
 ### Features
@@ -51,6 +53,7 @@ ALU/
 - VS Code with an integrated PowerShell terminal.
 - This repository cloned locally.
 - [Optional HDL extension for VS Code.](https://marketplace.visualstudio.com/items?itemName=mshr-h.VerilogHDL)
+- [Optional TerosHDL & Yosys extensions for VS Code.](https://marketplace.visualstudio.com/items?itemName=teros-technology.teroshdl)
 
 ### Installation
 - [Download Icarus Verilog & GTKWave.](https://bleyer.org/icarus/)
