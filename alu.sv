@@ -1,5 +1,5 @@
 // alu.sv
-// Tanish Gheewala - March 2026
+// Tanish Gheewala - Spring 2026
 // Parametric Arithmetic Logic Unit (ALU) at the RTL Level
 
 `timescale 1ns/1ps
