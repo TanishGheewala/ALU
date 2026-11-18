@@ -49,10 +49,18 @@ module alu_top #(
   logic                 reg_ovf  = 1'b0;
   logic                 reg_zero = 1'b1;
 
-  logic [(2*WIDTH)-1:0] hist_val [0:3] = '{default: '0};
-  logic [OPW-1:0]       hist_op  [0:3] = '{default: 4'b0100};
+  logic [(2*WIDTH)-1:0] hist_val [0:3];
+  logic [OPW-1:0]       hist_op  [0:3];
   logic                 hist_mode      = 1'b0;
   logic [1:0]           hist_idx       = 2'd0;
+
+  // History Power-On Initialization
+  initial begin
+    for (int i = 0; i < 4; i++) begin
+      hist_val[i] = '0;
+      hist_op[i]  = 4'b0100;
+    end
+  end
 
   // Active Display Signals
   logic [OPW-1:0]       disp_op;
