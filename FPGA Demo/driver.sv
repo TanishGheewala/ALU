@@ -29,6 +29,7 @@ module driver #(
   logic [3:0] d1;
   logic [3:0] d0;
   logic [3:0] cur_nibble;
+  logic       show_dp;
 
   // Binary-to-BCD Temporaries (Double Dabble)
   logic [15:0] bcd;
@@ -61,20 +62,23 @@ module driver #(
   always_comb
   begin
     if (dec_mode && (val <= 16'd999)) begin
-      d3 = op;
-      d2 = bcd[11:8];
-      d1 = bcd[7:4];
-      d0 = bcd[3:0];
+      d3      = op;
+      d2      = bcd[11:8];
+      d1      = bcd[7:4];
+      d0      = bcd[3:0];
+      show_dp = 1'b1;
     end else if (!dec_mode && (val <= 16'h0FFF)) begin
-      d3 = op;
-      d2 = val[11:8];
-      d1 = val[7:4];
-      d0 = val[3:0];
+      d3      = op;
+      d2      = val[11:8];
+      d1      = val[7:4];
+      d0      = val[3:0];
+      show_dp = 1'b1;
     end else begin
-      d3 = val[15:12];
-      d2 = val[11:8];
-      d1 = val[7:4];
-      d0 = val[3:0];
+      d3      = val[15:12];
+      d2      = val[11:8];
+      d1      = val[7:4];
+      d0      = val[3:0];
+      show_dp = 1'b0;
     end
   end
 
@@ -100,7 +104,7 @@ module driver #(
       2'b11: begin
         an         = 4'b0111;
         cur_nibble = d3;
-        dp         = 1'b0;
+        dp         = show_dp ? 1'b0 : 1'b1;
       end
       default: begin
         an         = 4'b1111;
